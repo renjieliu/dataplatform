@@ -1,0 +1,106 @@
+wget http://mirror.cc.columbia.edu/pub/software/apache/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz
+tar zxvf apache-zookeeper-3.6.1-bin.tar.gz
+ls -al
+mv apache-zookeeper-3.6.1-bin zookeeper
+cd zookeeper/
+cd conf/
+cp zoo_sample.cfg zoo.cfg
+cd ../
+bin/zkServer.sh start
+sudo netstat -tulpn | grep LISTEN   #make sure the server is listening on the 2181 port, if not, need to check zookeeper log
+
+wget http://apache.spinellicreations.com/kafka/2.6.0/kafka_2.12-2.6.0.tgz
+tar zxvf kafka_2.12-2.6.0.tgz
+mv kafka_2.12-2.6.0 kafka
+cd kafka
+cd config
+cp server.properties server.properties.20200826_2222
+nano server.properties #for sanity check only
+cd ../
+bin/kafka-server-start.sh config/server.properties
+
+
+############################ start a new terminal ############################
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic dp #create a new topic, dp (data platform)
+
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic dp
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dp --from-beginning
+
+
+############################ start a new terminal ############################
+cd dp
+touch dp.txt
+nano generate.py
+
+# enter below code for the new file and save.
+############################ 
+#Generating random numbers and push to the text file
+import numpy as np;
+import time;
+
+while True:
+    f = open('dp.txt','a')
+    a = str(np.random.randint(1, 200)) + '\r\n'
+    f.write(a)
+    f.close()
+    sl = np.random.randint(50, 1000)/1000
+    time.sleep(sl)
+############################
+
+
+python3.7 generate.py
+
+
+############################ start a new terminal ############################
+
+cd dp/kafka/
+ls -al
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dp --from-beginning
+exit
+history | grep temp
+cat /sys/class/thermal/thermal_zone0/temp
+cd dp
+ls -al
+cd zookeeper/
+bin/zkServer.sh start
+sudo netstat -tulpn | grep LISTEN
+cd ../
+cd kafka/
+bin/kafka-server-start.sh config/server.properties
+bin/kafka-server-start.sh
+ls -al
+bin/connect-standalone.sh dp-standalone.properties dp-file-source.properties
+cd config/
+ls -al
+../bin/connect-standalone.sh dp-standalone.properties dp-file-source.properties
+exit
+cd dp/kafka/
+cd config/
+top
+ls -al
+cat connect-file-source.properties
+touch ~/Share/dp/dp.txt
+nano ~/Share/dp/dp.txt
+ls -al
+cp connect-file-source.properties dp-file-source.properties
+nano dp-file-source.properties
+ls -al
+cp connect-standalone.properties dp-standalone.properties
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
