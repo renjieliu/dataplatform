@@ -1,0 +1,9 @@
+- [x] Install Zookeeper
+- [x] Install Kafka
+- [x] Connect Kafka with Zookeeper
+- [x] Install MySQL
+- [ ] Set up a table in MySQL to receive data from Kafka
+- [ ] Connect Kafka with MySQL
+- [x] Python script to generate text and push data to a log file (For the POC purpose, the file content could be anything)
+- [x] Connect Kafka to the log file 
+- [ ] Run the process, MySQL should be getting new data every second.
