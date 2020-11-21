@@ -1,0 +1,442 @@
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+------------Compile and build Apache Zepplin Failed on ARM32------------
+git clone https://github.com/apache/zeppelin.git;
+cd zepplin;
+sudo apt-get install protobuf-compiler -y 
+protoc --version 
+which protoc
+nano /home/pi/Share/dp/zeppelin/zeppelin-jupyter-interpreter/pom.xml #change the version of protoc to the version show in the prev command
+mvn clean
+#change the version below to the result of protoc --version
+#change the -Dfile location to the result of which protoc
+mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.6.1 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/usr/bin/protoc
+
+mvn clean package -DskipTests -Phadoop3
+
+
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Zeppelin 0.9.0-SNAPSHOT:
+[INFO]
+[INFO] Zeppelin ........................................... SUCCESS [ 25.294 s]
+[INFO] Zeppelin: Common ................................... SUCCESS [ 18.676 s]
+[INFO] Zeppelin: Interpreter .............................. SUCCESS [01:00 min]
+[INFO] Zeppelin: Interpreter Shaded ....................... SUCCESS [04:08 min]
+[INFO] Zeppelin: Interpreter Parent ....................... SUCCESS [ 12.197 s]
+[INFO] Zeppelin: Markdown interpreter ..................... SUCCESS [02:25 min]
+[INFO] Zeppelin: Jupyter Support .......................... SUCCESS [ 18.798 s]
+[INFO] Zeppelin: Zengine .................................. SUCCESS [01:11 min]
+[INFO] Zeppelin: Display system apis ...................... SUCCESS [ 56.679 s]
+[INFO] Zeppelin: Jupyter Interpreter ...................... FAILURE [02:26 min]
+[INFO] Zeppelin: Jupyter Interpreter Shaded ............... SKIPPED
+[INFO] Zeppelin: R ........................................ SKIPPED
+[INFO] Zeppelin: Kotlin interpreter ....................... SKIPPED
+[INFO] Zeppelin: Groovy interpreter ....................... SKIPPED
+[INFO] Zeppelin: Spark Parent ............................. SKIPPED
+[INFO] Zeppelin: Spark Shims .............................. SKIPPED
+[INFO] Zeppelin: Spark1 Shims ............................. SKIPPED
+[INFO] Zeppelin: Spark2 Shims ............................. SKIPPED
+[INFO] Zeppelin: Spark3 Shims ............................. SKIPPED
+[INFO] Zeppelin: Python interpreter ....................... SKIPPED
+[INFO] Zeppelin: Spark Interpreter ........................ SKIPPED
+[INFO] Zeppelin: Spark Scala Parent ....................... SKIPPED
+[INFO] Zeppelin: Spark Interpreter Scala_2.10 ............. SKIPPED
+[INFO] Zeppelin: Spark Interpreter Scala_2.11 ............. SKIPPED
+[INFO] Zeppelin: Spark Interpreter Scala_2.12 ............. SKIPPED
+[INFO] Zeppelin: Spark dependencies ....................... SKIPPED
+[INFO] Zeppelin: Shell interpreter ........................ SKIPPED
+[INFO] Zeppelin: Submarine interpreter .................... SKIPPED
+[INFO] Zeppelin: MongoDB interpreter ...................... SKIPPED
+[INFO] Zeppelin: Angular interpreter ...................... SKIPPED
+[INFO] Zeppelin: Livy interpreter ......................... SKIPPED
+[INFO] Zeppelin: HBase interpreter ........................ SKIPPED
+[INFO] Zeppelin: Apache Pig Interpreter ................... SKIPPED
+[INFO] Zeppelin: JDBC interpreter ......................... SKIPPED
+[INFO] Zeppelin: File System Interpreters ................. SKIPPED
+[INFO] Zeppelin: Flink Parent ............................. SKIPPED
+[INFO] Zeppelin: Flink Shims .............................. SKIPPED
+[INFO] Zeppelin: Flink1.10 Shims .......................... SKIPPED
+[INFO] Zeppelin: Flink1.11 Shims .......................... SKIPPED
+[INFO] Zeppelin: Flink .................................... SKIPPED
+[INFO] Zeppelin: Apache Ignite interpreter ................ SKIPPED
+[INFO] Zeppelin: InfluxDB interpreter ..................... SKIPPED
+[INFO] Zeppelin: Kylin interpreter ........................ SKIPPED
+[INFO] Zeppelin: Lens interpreter ......................... SKIPPED
+[INFO] Zeppelin: Apache Cassandra interpreter ............. SKIPPED
+[INFO] Zeppelin: Elasticsearch interpreter ................ SKIPPED
+[INFO] Zeppelin: BigQuery interpreter ..................... SKIPPED
+[INFO] Zeppelin: Alluxio interpreter ...................... SKIPPED
+[INFO] Zeppelin: Scio ..................................... SKIPPED
+[INFO] Zeppelin: Neo4j interpreter ........................ SKIPPED
+[INFO] Zeppelin: Sap ...................................... SKIPPED
+[INFO] Zeppelin: Scalding interpreter ..................... SKIPPED
+[INFO] Zeppelin: Java interpreter ......................... SKIPPED
+[INFO] Zeppelin: Beam interpreter ......................... SKIPPED
+[INFO] Zeppelin: Hazelcast Jet interpreter ................ SKIPPED
+[INFO] Zeppelin: Apache Geode interpreter ................. SKIPPED
+[INFO] Zeppelin: Kafka SQL interpreter .................... SKIPPED
+[INFO] Zeppelin: Sparql interpreter ....................... SKIPPED
+[INFO] Zeppelin: Client ................................... SKIPPED
+[INFO] Zeppelin: Client Examples .......................... SKIPPED
+[INFO] Zeppelin: web Application .......................... SKIPPED
+[INFO] Zeppelin: Server ................................... SKIPPED
+[INFO] Zeppelin: Plugins Parent ........................... SKIPPED
+[INFO] Zeppelin: Plugin S3NotebookRepo .................... SKIPPED
+[INFO] Zeppelin: Plugin GitHubNotebookRepo ................ SKIPPED
+[INFO] Zeppelin: Plugin AzureNotebookRepo ................. SKIPPED
+[INFO] Zeppelin: Plugin GCSNotebookRepo ................... SKIPPED
+[INFO] Zeppelin: Plugin ZeppelinHubRepo ................... SKIPPED
+[INFO] Zeppelin: Plugin FileSystemNotebookRepo ............ SKIPPED
+[INFO] Zeppelin: Plugin MongoNotebookRepo ................. SKIPPED
+[INFO] Zeppelin: Plugin OSSNotebookRepo ................... SKIPPED
+[INFO] Zeppelin: Plugin Kubernetes StandardLauncher ....... SKIPPED
+[INFO] Zeppelin: Plugin Flink Launcher .................... SKIPPED
+[INFO] Zeppelin: Plugin Docker Launcher ................... SKIPPED
+[INFO] Zeppelin: Plugin Cluster Launcher .................. SKIPPED
+[INFO] Zeppelin: Plugin Yarn Launcher ..................... SKIPPED
+[INFO] Zeppelin: Packaging distribution ................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13:27 min
+[INFO] Finished at: 2020-11-21T16:33:53-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.xolstice.maven.plugins:protobuf-maven-plugin:0.5.0:compile (default) on project zeppelin-jupyter-interpreter: Missing:
+[ERROR] ----------
+[ERROR] 1) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+[ERROR]
+[ERROR]   Try downloading the file manually from the project website.
+[ERROR]
+[ERROR]   Then, install it using the command:
+[ERROR]       mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file
+[ERROR]
+[ERROR]   Alternatively, if you host your own repository you can deploy the file there:
+[ERROR]       mvn deploy:deploy-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file -Durl=[url] -DrepositoryId=[id]
+[ERROR]
+[ERROR]   Path to dependency:
+[ERROR]         1) org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+[ERROR]         2) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+[ERROR]
+[ERROR] ----------
+[ERROR] 1 required artifact is missing.
+[ERROR]
+[ERROR] for artifact:
+[ERROR]   org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+[ERROR]
+[ERROR] from the specified remote repositories:
+[ERROR]   apache.snapshots (http://repository.apache.org/snapshots, releases=false, snapshots=true),
+[ERROR]   central (https://repo.maven.apache.org/maven2, releases=true, snapshots=false)
+[ERROR]
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.xolstice.maven.plugins:protobuf-maven-plugin:0.5.0:compile (default) on project zeppelin-jupyter-interpreter: Missing:
+----------
+1) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+
+  Try downloading the file manually from the project website.
+
+  Then, install it using the command:
+      mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file
+
+  Alternatively, if you host your own repository you can deploy the file there:
+      mvn deploy:deploy-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file -Durl=[url] -DrepositoryId=[id]
+
+  Path to dependency:
+        1) org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+        2) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+
+----------
+1 required artifact is missing.
+
+for artifact:
+  org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+
+from the specified remote repositories:
+  apache.snapshots (http://repository.apache.org/snapshots, releases=false, snapshots=true),
+  central (https://repo.maven.apache.org/maven2, releases=true, snapshots=false)
+
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:215)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+Caused by: org.apache.maven.plugin.MojoExecutionException: Missing:
+----------
+1) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+
+  Try downloading the file manually from the project website.
+
+  Then, install it using the command:
+      mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file
+
+  Alternatively, if you host your own repository you can deploy the file there:
+      mvn deploy:deploy-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file -Durl=[url] -DrepositoryId=[id]
+
+  Path to dependency:
+        1) org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+        2) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+
+----------
+1 required artifact is missing.
+
+for artifact:
+  org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+
+from the specified remote repositories:
+  apache.snapshots (http://repository.apache.org/snapshots, releases=false, snapshots=true),
+  central (https://repo.maven.apache.org/maven2, releases=true, snapshots=false)
+
+    at org.xolstice.maven.plugin.protobuf.AbstractProtocMojo.resolveBinaryArtifact (AbstractProtocMojo.java:962)
+    at org.xolstice.maven.plugin.protobuf.AbstractProtocMojo.execute (AbstractProtocMojo.java:489)
+    at org.xolstice.maven.plugin.protobuf.AbstractProtocCompileMojo.execute (AbstractProtocCompileMojo.java:31)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+Caused by: org.apache.maven.artifact.resolver.MultipleArtifactsNotFoundException: Missing:
+----------
+1) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+
+  Try downloading the file manually from the project website.
+
+  Then, install it using the command:
+      mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file
+
+  Alternatively, if you host your own repository you can deploy the file there:
+      mvn deploy:deploy-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=3.3.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file -Durl=[url] -DrepositoryId=[id]
+
+  Path to dependency:
+        1) org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+        2) com.google.protobuf:protoc:exe:linux-arm_32:3.3.0
+
+----------
+1 required artifact is missing.
+
+for artifact:
+  org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+
+from the specified remote repositories:
+  apache.snapshots (http://repository.apache.org/snapshots, releases=false, snapshots=true),
+  central (https://repo.maven.apache.org/maven2, releases=true, snapshots=false)
+
+    at org.apache.maven.artifact.resolver.DefaultResolutionErrorHandler.throwErrors (DefaultResolutionErrorHandler.java:73)
+    at org.xolstice.maven.plugin.protobuf.AbstractProtocMojo.resolveBinaryArtifact (AbstractProtocMojo.java:960)
+    at org.xolstice.maven.plugin.protobuf.AbstractProtocMojo.execute (AbstractProtocMojo.java:489)
+    at org.xolstice.maven.plugin.protobuf.AbstractProtocCompileMojo.execute (AbstractProtocCompileMojo.java:31)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[ERROR]
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :zeppelin-jupyter-interpreter
+{"active":true,"iden":"ujDs08MxSUesjBPFVtFi68","created":1605994433.8655422,"modified":1605994433.8712592,"data":{"addresses":["+19143096088"],"message":"The job on Rpi is done","target_device_iden":"ujDs08MxSUesjAbE6cJN0e"}}
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Zeppelin 0.9.0-SNAPSHOT:
+[INFO]
+[INFO] Zeppelin ........................................... SUCCESS [ 10.159 s]
+[INFO] Zeppelin: Common ................................... SUCCESS [  7.893 s]
+[INFO] Zeppelin: Interpreter .............................. SUCCESS [ 41.526 s]
+[INFO] Zeppelin: Interpreter Shaded ....................... SUCCESS [04:02 min]
+[INFO] Zeppelin: Interpreter Parent ....................... SUCCESS [  6.657 s]
+[INFO] Zeppelin: Markdown interpreter ..................... SUCCESS [ 18.516 s]
+[INFO] Zeppelin: Jupyter Support .......................... SUCCESS [  7.412 s]
+[INFO] Zeppelin: Zengine .................................. SUCCESS [ 30.168 s]
+[INFO] Zeppelin: Display system apis ...................... SUCCESS [ 27.414 s]
+[INFO] Zeppelin: Jupyter Interpreter ...................... FAILURE [  8.405 s]
+[INFO] Zeppelin: Jupyter Interpreter Shaded ............... SKIPPED
+[INFO] Zeppelin: R ........................................ SKIPPED
+[INFO] Zeppelin: Kotlin interpreter ....................... SKIPPED
+[INFO] Zeppelin: Groovy interpreter ....................... SKIPPED
+[INFO] Zeppelin: Spark Parent ............................. SKIPPED
+[INFO] Zeppelin: Spark Shims .............................. SKIPPED
+[INFO] Zeppelin: Spark1 Shims ............................. SKIPPED
+[INFO] Zeppelin: Spark2 Shims ............................. SKIPPED
+[INFO] Zeppelin: Spark3 Shims ............................. SKIPPED
+[INFO] Zeppelin: Python interpreter ....................... SKIPPED
+[INFO] Zeppelin: Spark Interpreter ........................ SKIPPED
+[INFO] Zeppelin: Spark Scala Parent ....................... SKIPPED
+[INFO] Zeppelin: Spark Interpreter Scala_2.10 ............. SKIPPED
+[INFO] Zeppelin: Spark Interpreter Scala_2.11 ............. SKIPPED
+[INFO] Zeppelin: Spark Interpreter Scala_2.12 ............. SKIPPED
+[INFO] Zeppelin: Spark dependencies ....................... SKIPPED
+[INFO] Zeppelin: Shell interpreter ........................ SKIPPED
+[INFO] Zeppelin: Submarine interpreter .................... SKIPPED
+[INFO] Zeppelin: MongoDB interpreter ...................... SKIPPED
+[INFO] Zeppelin: Angular interpreter ...................... SKIPPED
+[INFO] Zeppelin: Livy interpreter ......................... SKIPPED
+[INFO] Zeppelin: HBase interpreter ........................ SKIPPED
+[INFO] Zeppelin: Apache Pig Interpreter ................... SKIPPED
+[INFO] Zeppelin: JDBC interpreter ......................... SKIPPED
+[INFO] Zeppelin: File System Interpreters ................. SKIPPED
+[INFO] Zeppelin: Flink Parent ............................. SKIPPED
+[INFO] Zeppelin: Flink Shims .............................. SKIPPED
+[INFO] Zeppelin: Flink1.10 Shims .......................... SKIPPED
+[INFO] Zeppelin: Flink1.11 Shims .......................... SKIPPED
+[INFO] Zeppelin: Flink .................................... SKIPPED
+[INFO] Zeppelin: Apache Ignite interpreter ................ SKIPPED
+[INFO] Zeppelin: InfluxDB interpreter ..................... SKIPPED
+[INFO] Zeppelin: Kylin interpreter ........................ SKIPPED
+[INFO] Zeppelin: Lens interpreter ......................... SKIPPED
+[INFO] Zeppelin: Apache Cassandra interpreter ............. SKIPPED
+[INFO] Zeppelin: Elasticsearch interpreter ................ SKIPPED
+[INFO] Zeppelin: BigQuery interpreter ..................... SKIPPED
+[INFO] Zeppelin: Alluxio interpreter ...................... SKIPPED
+[INFO] Zeppelin: Scio ..................................... SKIPPED
+[INFO] Zeppelin: Neo4j interpreter ........................ SKIPPED
+[INFO] Zeppelin: Sap ...................................... SKIPPED
+[INFO] Zeppelin: Scalding interpreter ..................... SKIPPED
+[INFO] Zeppelin: Java interpreter ......................... SKIPPED
+[INFO] Zeppelin: Beam interpreter ......................... SKIPPED
+[INFO] Zeppelin: Hazelcast Jet interpreter ................ SKIPPED
+[INFO] Zeppelin: Apache Geode interpreter ................. SKIPPED
+[INFO] Zeppelin: Kafka SQL interpreter .................... SKIPPED
+[INFO] Zeppelin: Sparql interpreter ....................... SKIPPED
+[INFO] Zeppelin: Client ................................... SKIPPED
+[INFO] Zeppelin: Client Examples .......................... SKIPPED
+[INFO] Zeppelin: web Application .......................... SKIPPED
+[INFO] Zeppelin: Server ................................... SKIPPED
+[INFO] Zeppelin: Plugins Parent ........................... SKIPPED
+[INFO] Zeppelin: Plugin S3NotebookRepo .................... SKIPPED
+[INFO] Zeppelin: Plugin GitHubNotebookRepo ................ SKIPPED
+[INFO] Zeppelin: Plugin AzureNotebookRepo ................. SKIPPED
+[INFO] Zeppelin: Plugin GCSNotebookRepo ................... SKIPPED
+[INFO] Zeppelin: Plugin ZeppelinHubRepo ................... SKIPPED
+[INFO] Zeppelin: Plugin FileSystemNotebookRepo ............ SKIPPED
+[INFO] Zeppelin: Plugin MongoNotebookRepo ................. SKIPPED
+[INFO] Zeppelin: Plugin OSSNotebookRepo ................... SKIPPED
+[INFO] Zeppelin: Plugin Kubernetes StandardLauncher ....... SKIPPED
+[INFO] Zeppelin: Plugin Flink Launcher .................... SKIPPED
+[INFO] Zeppelin: Plugin Docker Launcher ................... SKIPPED
+[INFO] Zeppelin: Plugin Cluster Launcher .................. SKIPPED
+[INFO] Zeppelin: Plugin Yarn Launcher ..................... SKIPPED
+[INFO] Zeppelin: Packaging distribution ................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  06:43 min
+[INFO] Finished at: 2020-11-21T17:38:53-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.xolstice.maven.plugins:protobuf-maven-plugin:0.5.0:compile-custom (default) on project zeppelin-jupyter-interpreter: Missing:
+[ERROR] ----------
+[ERROR] 1) io.grpc:protoc-gen-grpc-java:exe:linux-arm_32:1.4.0
+[ERROR]
+[ERROR]   Try downloading the file manually from the project website.
+[ERROR]
+[ERROR]   Then, install it using the command:
+[ERROR]       mvn install:install-file -DgroupId=io.grpc -DartifactId=protoc-gen-grpc-java -Dversion=1.4.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file
+[ERROR]
+[ERROR]   Alternatively, if you host your own repository you can deploy the file there:
+[ERROR]       mvn deploy:deploy-file -DgroupId=io.grpc -DartifactId=protoc-gen-grpc-java -Dversion=1.4.0 -Dclassifier=linux-arm_32 -Dpackaging=exe -Dfile=/path/to/file -Durl=[url] -DrepositoryId=[id]
+[ERROR]
+[ERROR]   Path to dependency:
+[ERROR]         1) org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+[ERROR]         2) io.grpc:protoc-gen-grpc-java:exe:linux-arm_32:1.4.0
+[ERROR]
+[ERROR] ----------
+[ERROR] 1 required artifact is missing.
+[ERROR]
+[ERROR] for artifact:
+[ERROR]   org.apache.zeppelin:zeppelin-jupyter-interpreter:jar:0.9.0-SNAPSHOT
+[ERROR]
+[ERROR] from the specified remote repositories:
+[ERROR]   apache.snapshots (http://repository.apache.org/snapshots, releases=false, snapshots=true),
+[ERROR]   central (https://repo.maven.apache.org/maven2, releases=true, snapshots=false)
+[ERROR]
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :zeppelin-jupyter-interpreter
+
+
+Final result:
+
+
+cannot fint the ARMv7 version of the protoc-gen-grpc-java
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+
