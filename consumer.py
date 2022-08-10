@@ -9,7 +9,7 @@ while True:
         records.append(curr)
         if curr % 2 == 0:
             break
-    cnx = mysql.connector.connect(host='127.0.0.1', user='root', database='dp', password='password1!')
+    cnx = mysql.connector.connect(host='127.0.0.1', user='root', database='dp', password='xxxxxxxx')
 
     cursor = cnx.cursor()
 

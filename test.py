@@ -2,7 +2,7 @@ import mysql.connector
 from kafka import KafkaConsumer
 
 while True:
-    cnx = mysql.connector.connect(host='127.0.0.1', user='root', database='dp', password='password1!')
+    cnx = mysql.connector.connect(host='127.0.0.1', user='root', database='dp', password='xxxxxxx')
     cursor = cnx.cursor()
     consumer = KafkaConsumer('cpu_temp')
     records = []
